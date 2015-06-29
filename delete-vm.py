@@ -7,8 +7,13 @@ tenans_list = keystone.tenants.list()
 for i in range(len(tenans_list)):
 	if tenans_list[i].name not in predef_tenants:
 		tenants.append(str(tenans_list[i].name))
-print tenants
+#print tenants
 
-nova = nclient.Client(2,'admin','secret123', 'ali', "http://127.0.0.1:5000/v2.0",service_type="compute")
-compute_list = nova.servers.list()
-print compute_list[0].name
+for tenant in tenants:
+	nova = nclient.Client(2,'admin','secret123', tenant , "http://127.0.0.1:5000/v2.0",service_type="compute")
+	for i in range(len(nova.servers.list())):
+		compute_list = nova.servers.list(i)
+		#print compute_list
+		#print compute_list[0].id
+		nova.servers.delete(compute_list[i].id)
+		#print compute_list
