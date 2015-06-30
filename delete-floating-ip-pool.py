@@ -6,6 +6,7 @@ from neutronclient.neutron import client as neclient
 import os
 import csv
 import getopt
+import sys
 
 def main(argv):
 	try:
