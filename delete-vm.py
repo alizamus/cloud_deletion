@@ -11,7 +11,7 @@ def main(argv):
 	try:
 		opts, args = getopt.getopt(argv, "ha:", ["help", "admin_pass="])
 	except getopt.GetoptError:                                
-	sys.exit(2)
+		sys.exit(2)
 
 	for opt, arg in opts:       
 		if opt in ("-h", "--help"):                         
