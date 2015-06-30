@@ -32,7 +32,7 @@ def main(argv):
 	
 	
 	for tenant in tenants:
-		res= os.system("./code/config --username admin --password " + admin_pass + " --tenant " + tenant +  " --api-server 127.0.0.1 show floating-ip-pool" + " > " + "test.csv")
+		res= os.system("./code/config --username admin --password " + admin_pass + " --tenant " + tenant +  " --api-server 127.0.0.1 show floating-ip-pool" + " > " + "/root/cloud_deletion/test.csv")
 	
 		with open('./test.csv', 'rb') as csvfile:
 			rules = csv.reader(csvfile)
