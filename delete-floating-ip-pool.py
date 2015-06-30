@@ -32,15 +32,15 @@ def main(argv):
 	
 	
 	for tenant in tenants:
-		res= os.system("./code/config --username admin --password " + admin_pass + " --tenant " + tenant +  " --api-server 127.0.0.1 show floating-ip-pool" + " > " + "/root/cloud_deletion/test.csv")
+		res= os.system("/root/cloud_deletion/code/config --username admin --password " + admin_pass + " --tenant " + tenant +  " --api-server 127.0.0.1 show floating-ip-pool" + " > " + "/root/cloud_deletion/test.csv")
 	
-		with open('./test.csv', 'rb') as csvfile:
+		with open('/root/cloud_deletion/test.csv', 'rb') as csvfile:
 			rules = csv.reader(csvfile)
 			for row in rules:
 				a = str(row[0])
 				b = a.split(' in network ',1)[1]
 				c = a.split(' in network ',1)[0]
-				comand = "./code/config --username admin --password " + admin_pass + " --tenant " + tenant +  " --api-server 127.0.0.1 delete floating-ip-pool " + "--network " + c + " "  + "'" + b + "'"	
+				comand = "/root/cloud_deletion/code/config --username admin --password " + admin_pass + " --tenant " + tenant +  " --api-server 127.0.0.1 delete floating-ip-pool " + "--network " + c + " "  + "'" + b + "'"	
 				os.system(comand)
 
 
