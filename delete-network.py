@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from keystoneclient.v2_0 import client as kclient
 from novaclient import client as nclient
 from neutronclient.neutron import client as neclient

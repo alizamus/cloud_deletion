@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from keystoneclient.v2_0 import client as kclient
 from novaclient import client as nclient
 keystone = kclient.Client(username='admin', password='secret123', tenant_name='admin', auth_url="http://127.0.0.1:5000/v2.0")
