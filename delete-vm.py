@@ -6,31 +6,36 @@ import sys
 import os
 import getopt
 
-try:
-	opts, args = getopt.getopt(argv, "ha:", ["help", "admin_pass="])
-except getopt.GetoptError:                                
+def main(argv):
+
+	try:
+		opts, args = getopt.getopt(argv, "ha:", ["help", "admin_pass="])
+	except getopt.GetoptError:                                
 	sys.exit(2)
 
-for opt, arg in opts:       
-	if opt in ("-h", "--help"):                         
-		sys.exit()                                   
-	elif opt in ("-a", "--admin_pass"): 
-		admin_pass = arg
+	for opt, arg in opts:       
+		if opt in ("-h", "--help"):                         
+			sys.exit()                                   
+		elif opt in ("-a", "--admin_pass"): 
+			admin_pass = arg
 
-keystone = kclient.Client(username='admin', password=admin_pass, tenant_name='admin', auth_url="http://127.0.0.1:5000/v2.0")
-predef_tenants = ['admin','demo','service','invisible_to_admin']
-tenants = []
-tenans_list = keystone.tenants.list()
-for i in range(len(tenans_list)):
-	if tenans_list[i].name not in predef_tenants:
-		tenants.append(str(tenans_list[i].name))
-#print tenants
-
-for tenant in tenants:
-	nova = nclient.Client(2,'admin', admin_pass, tenant, "http://127.0.0.1:5000/v2.0",service_type="compute")
-	for i in range(len(nova.servers.list())):
-		compute_list = nova.servers.list(i)
-		#print compute_list
-		#print compute_list[0].id
-		nova.servers.delete(compute_list[i].id)
-		#print compute_list
+	keystone = kclient.Client(username='admin', password=admin_pass, tenant_name='admin', auth_url="http://127.0.0.1:5000/v2.0")
+	predef_tenants = ['admin','demo','service','invisible_to_admin']
+	tenants = []
+	tenans_list = keystone.tenants.list()
+	for i in range(len(tenans_list)):
+		if tenans_list[i].name not in predef_tenants:
+			tenants.append(str(tenans_list[i].name))
+	#print tenants
+	
+	for tenant in tenants:
+		nova = nclient.Client(2,'admin', admin_pass, tenant, "http://127.0.0.1:5000/v2.0",service_type="compute")
+		for i in range(len(nova.servers.list())):
+			compute_list = nova.servers.list(i)
+			#print compute_list
+			#print compute_list[0].id
+			nova.servers.delete(compute_list[i].id)
+			#print compute_list
+	
+if __name__ == "__main__":
+    main(sys.argv[1:])
