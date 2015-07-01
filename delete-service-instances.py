@@ -40,7 +40,8 @@ def main(argv):
 				a = str(row[0])
 				b = a.split('    ',1)[1]
 				c = a.split('    ',1)[0]
-				comand = "/root/cloud_deletion/code/config --username admin --password " + admin_pass + " --tenant " + tenant +  " --api-server 127.0.0.1 delete service-instance " + "'" + b + "'"	
+				comand = "/root/cloud_deletion/code/config --username admin --password " + admin_pass + " --tenant " + tenant +  " --api-server 127.0.0.1 delete service-instance " + "'" + b + "'"
+				#print comand	
 				os.system(comand)
 
 
